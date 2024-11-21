@@ -9,7 +9,7 @@ client = MilvusClient("http://localhost:19530") # Replace with ./milvus_demo.db 
 #########################################################################
 res = client.get(
     collection_name="customers",
-    ids=[37],
+    ids=[3],
     output_fields=["name"],
 )
 print("1: ", res)
@@ -100,10 +100,10 @@ print("7: ", res)
 limit = client.query(
     collection_name="customers",
     output_fields=["count(*)"],
-)
+)[0]["count(*)"]
 res = client.query(
     collection_name="customers",
-    limit=limit[0]["count(*)"],
+    limit=limit,
     output_fields=["age"],
 )
 ageSum = 0
@@ -125,7 +125,7 @@ print("9: ", res)
 
 
 #########################################################################
-# Aufgabe 9
+# Aufgabe 10
 #########################################################################
 vector = client.query(
     collection_name="customers",
